@@ -1,0 +1,199 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_marginTop="32dp"
+    tools:context="com.mikelaird.drivinglog.ConfigActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Total Time Value"
+        android:id="@+id/totalTimeLabelTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="24dp"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/totalHr10Picker"
+            android:layout_gravity="center_vertical" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/totalHr1Picker"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:id="@+id/colonTextView"
+            android:layout_gravity="center_vertical"
+            android:textSize="28dp" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/totalMin10Picker"
+            android:layout_gravity="center_vertical" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/totalMin1Picker"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:id="@+id/colon2TextView"
+            android:layout_gravity="center_vertical"
+            android:textSize="28dp" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/totalSec10Picker"
+            android:layout_gravity="center_vertical" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/totalSec1Picker"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Night Time Value"
+        android:id="@+id/nightTimeLabelTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="24dp"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/nightHr10Picker"
+            android:layout_gravity="center_vertical" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/nightHr1Picker"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:id="@+id/colon3TextView"
+            android:layout_gravity="center_vertical"
+            android:textSize="28dp" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/nightMin10Picker"
+            android:layout_gravity="center_vertical" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/nightMin1Picker"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:id="@+id/colon4TextView"
+            android:layout_gravity="center_vertical"
+            android:textSize="28dp" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/nightSec10Picker"
+            android:layout_gravity="center_vertical" />
+
+        <NumberPicker
+            android:layout_width="48dp"
+            android:layout_height="108dp"
+            android:id="@+id/nightSec1Picker"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_button_text"
+            android:id="@+id/saveConfigButton"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="38dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_button_text"
+            android:id="@+id/cancelConfigButton"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="38dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
