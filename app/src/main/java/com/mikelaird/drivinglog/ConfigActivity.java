@@ -26,8 +26,6 @@ public class ConfigActivity extends AppCompatActivity {
     private NumberPicker nightMin1Picker;
     private NumberPicker nightSec10Picker;
     private NumberPicker nightSec1Picker;
-    private Button saveConfigButton;
-    private Button cancelConfigButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,9 @@ public class ConfigActivity extends AppCompatActivity {
         setContentView(R.layout.activity_config);
 
         // Get references to widgets
+        Button saveConfigButton = (Button)findViewById(R.id.saveConfigButton);
+        Button cancelConfigButton = (Button)findViewById(R.id.cancelConfigButton);
+
         totalHr10Picker = (NumberPicker)findViewById(R.id.totalHr10Picker);
         totalHr1Picker = (NumberPicker)findViewById(R.id.totalHr1Picker);
         totalMin10Picker = (NumberPicker)findViewById(R.id.totalMin10Picker);
@@ -47,8 +48,7 @@ public class ConfigActivity extends AppCompatActivity {
         nightMin1Picker = (NumberPicker)findViewById(R.id.nightMin1Picker);
         nightSec10Picker = (NumberPicker)findViewById(R.id.nightSec10Picker);
         nightSec1Picker = (NumberPicker)findViewById(R.id.nightSec1Picker);
-        saveConfigButton = (Button)findViewById(R.id.saveConfigButton);
-        cancelConfigButton = (Button)findViewById(R.id.cancelConfigButton);
+
 
         // Set the ranges for the pickers
         totalHr10Picker.setMinValue(0);
@@ -77,6 +77,7 @@ public class ConfigActivity extends AppCompatActivity {
         nightSec1Picker.setMinValue(0);
         nightSec1Picker.setMaxValue(9);
 
+        // If the timer is running, then disable the Save button
         if (getIntent().getBooleanExtra(MainActivity.IS_RUNNING, true)) {
             saveConfigButton.setEnabled(false);
         }
