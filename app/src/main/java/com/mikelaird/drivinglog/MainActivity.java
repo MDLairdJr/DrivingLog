@@ -1,19 +1,24 @@
 package com.mikelaird.drivinglog;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tripTime;
     private TextView nightTime;
     private Button timerButton;
-    private Button newTripButton;
-    private Switch nightSwitch;
+    private EditText driveLogEditText;
+    private Button driveLogSaveButton;
 
     private boolean isRunning = false;
     private boolean isNight = false;
@@ -47,12 +52,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Get references to widgets
+        Button newTripButton = (Button)findViewById(R.id.newTripButton);
+        Switch nightSwitch = (Switch)findViewById(R.id.nightSwitch);
         totTime = (TextView)findViewById(R.id.totalTime);
         tripTime = (TextView)findViewById(R.id.tripTime);
         nightTime = (TextView)findViewById(R.id.totalNightTime);
         timerButton = (Button)findViewById(R.id.timerButton);
-        newTripButton = (Button)findViewById(R.id.newTripButton);
-        nightSwitch = (Switch)findViewById(R.id.nightSwitch);
+        driveLogEditText = (EditText)findViewById(R.id.driveLogEditText);
+        driveLogSaveButton = (Button)findViewById(R.id.driveLogSaveButton);
+
 
         restorePersistedTimeValues();
 
@@ -124,6 +132,41 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        driveLogEditText.setHorizontallyScrolling(false);
+        driveLogEditText.setMaxLines(Integer.MAX_VALUE);
+        driveLogEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        driveLogEditText.setImeActionLabel(getResources().getString(R.string.done_button_text), EditorInfo.IME_ACTION_DONE);
+
+        // Is this the right listener to implement?  Need to learn more about these . . .
+        // https://github.com/codepath/android_guides/wiki/Basic-Event-Listeners
+        // This one fires when an "action" button on the soft keyboard is pressed
+        driveLogEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == EditorInfo.IME_ACTION_DONE) {
+                    driveLogEditText.clearFocus();
+                }
+                return false;
+            }
+        });
+
+        driveLogSaveButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // This section is just debugging code to display the text
+                Context context = getApplicationContext();
+                CharSequence text = driveLogEditText.getText();
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                driveLogEditText.getText().clear();
+
+            }
+        });
+
     }
 
     private Runnable updateTimerThread = new Runnable() {
