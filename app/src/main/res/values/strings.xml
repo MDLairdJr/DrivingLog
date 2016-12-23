@@ -14,5 +14,5 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="title_activity_config">Configure</string>
     <string name="done_button_text">Done</string>
-    <string name="title_activity_trip_details">TripDetailsActivity</string>
+    <string name="title_activity_trip_details">Trip Details</string>
 </resources>
