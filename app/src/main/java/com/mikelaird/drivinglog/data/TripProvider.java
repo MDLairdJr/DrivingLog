@@ -91,19 +91,21 @@ public class TripProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch(match) {
             case TRIPS:
-                cursor = db.query(TripEntry.TABLE_NAME,projection, selection,
+                cursor = db.query(TripEntry.TABLE_NAME, projection, selection,
                         selectionArgs, null, null, sortOrder);
                 break;
             case TRIP_ID:
                 selection = TripEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                cursor = db.query(TripEntry.TABLE_NAME,projection, selection,
+                cursor = db.query(TripEntry.TABLE_NAME, projection, selection,
                         selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot query invalid URI " + uri);
 
         }
+        cursor.moveToFirst();
+        Log.i(LOG_TAG, "Retrieved from database: " + cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DATETIME)));
         return cursor;
     }
 
@@ -136,6 +138,8 @@ public class TripProvider extends ContentProvider {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
             return null;
         }
+
+        Log.i(LOG_TAG,"Inserted datetime value of: " + values.getAsLong(TripEntry.COLUMN_NAME_DATETIME));
 
         // Once we know the ID of the new row in the table,
         // return the new URI with the ID appended to the end of it

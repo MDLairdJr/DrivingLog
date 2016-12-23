@@ -17,6 +17,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/trip_details_text_view"
+        android:id="@+id/trip_details_list_view"
         tools:text="Trip Details" />
 </LinearLayout>

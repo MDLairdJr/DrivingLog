@@ -26,13 +26,16 @@ import static com.mikelaird.drivinglog.data.TripContract.TripEntry;
 
 public class TripDbOpenHelper extends SQLiteOpenHelper {
 
+    /** Tag for the log messages */
+    public static final String LOG_TAG = TripDbOpenHelper.class.getSimpleName();
+
     // Database details
     private static final String DATABASE_NAME = "driving_details.db";
     private static final int DATABASE_VERSION = 1;
 
     final private static String CREATE_CMD = "CREATE TABLE " + TripEntry.TABLE_NAME + " (" +
             TripEntry._ID + " integer primary key autoincrement, " +
-            TripEntry.COLUMN_NAME_DATETIME + " text not null, " +
+            TripEntry.COLUMN_NAME_DATETIME + " integer not null, " +
             TripEntry.COLUMN_NAME_DURATION + " text null, " +
             TripEntry.COLUMN_NAME_NOTES + " text null);";
 

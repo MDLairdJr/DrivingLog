@@ -23,10 +23,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mikelaird.drivinglog.data.TripContract;
+import com.mikelaird.drivinglog.data.TripContract.TripEntry;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    /** Tag for the log messages */
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     public static final int CONFIG_CODE = 1;
     public static final String IS_RUNNING = "isRunning";
@@ -102,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
                     // if this is a new trip, create an entry in the database
                     if(isNewTrip) {
                         ContentValues initialValues = new ContentValues();
-                        initialValues.put(TripContract.TripEntry.COLUMN_NAME_DATETIME, System.currentTimeMillis());
-                        Uri uri = getContentResolver().insert(TripContract.TripEntry.CONTENT_URI, initialValues);
+                        initialValues.put(TripEntry.COLUMN_NAME_DATETIME, System.currentTimeMillis());
+                        Uri uri = getContentResolver().insert(TripEntry.CONTENT_URI, initialValues);
                         if(uri == null) {
                             throw new IllegalArgumentException("Failed to insert new trip using " + uri);
                         }
@@ -114,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
                     // This section is just debugging code to display the rowId
                     Context context = getApplicationContext();
-                    CharSequence text = "Trip: " + String.valueOf(tripId);
+                    //CharSequence text = "Trip: " + String.valueOf(tripId);
+                    CharSequence text = String.valueOf(System.currentTimeMillis());
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();

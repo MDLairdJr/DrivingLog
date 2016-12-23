@@ -10,6 +10,9 @@ import android.provider.BaseColumns;
 
 public final class TripContract {
 
+    /** Tag for the log messages */
+    public static final String LOG_TAG = TripContract.class.getSimpleName();
+
     public static final String CONTENT_AUTHORITY = "com.mikelaird.drivinglog";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_TRIPS = "trips";
