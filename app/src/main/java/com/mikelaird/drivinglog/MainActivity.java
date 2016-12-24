@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
                     // This section is just debugging code to display the rowId
                     Context context = getApplicationContext();
-                    //CharSequence text = "Trip: " + String.valueOf(tripId);
-                    CharSequence text = String.valueOf(System.currentTimeMillis());
+                    CharSequence text = "Trip: " + String.valueOf(tripId);
+                    //CharSequence text = String.valueOf(System.currentTimeMillis());
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
@@ -196,14 +196,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // This section is just debugging code to display the text
+                // Let's derive the URI for the current trip record in the database
+                Uri uri = ContentUris.withAppendedId(TripEntry.CONTENT_URI, tripId);
+
+                // Now create a ContentValues object and set the value of the details field
+                ContentValues values = new ContentValues();
+                values.put(TripEntry.COLUMN_NAME_NOTES, driveLogEditText.getText().toString());
+
+                // Call the update method on the ContentResolver to perform the database update
+                getContentResolver().update(uri, values, null, null);
+
+                // This section is just debugging code . . .
                 Context context = getApplicationContext();
-                CharSequence text = driveLogEditText.getText();
+                //CharSequence text = driveLogEditText.getText();
+                CharSequence text = "Uri: " + uri.toString();
                 int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
-                driveLogEditText.getText().clear();
+                // driveLogEditText.getText().clear();
 
             }
         });
