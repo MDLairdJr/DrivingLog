@@ -36,19 +36,28 @@ public class TripProvider extends ContentProvider {
         // Get writeable database
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
 
+        int rowsDeleted;
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case TRIPS:
                 // Delete all rows that match the selection and selection args
-                return db.delete(TripEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(TripEntry.TABLE_NAME, selection, selectionArgs);
+                break;
             case TRIP_ID:
                 // Delete a single row given by the ID in the URI
                 selection = TripEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                return db.delete(TripEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(TripEntry.TABLE_NAME, selection, selectionArgs);
+                break;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
+
+        if(rowsDeleted > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsDeleted;
     }
 
     @Override
@@ -104,8 +113,12 @@ public class TripProvider extends ContentProvider {
                 throw new IllegalArgumentException("Cannot query invalid URI " + uri);
 
         }
-        cursor.moveToFirst();
-        Log.i(LOG_TAG, "Retrieved from database: " + cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DATETIME)));
+
+        // Set notification URI on the Cursor,
+        // so we know what content URI the Cursor was created for.
+        // If the data at this URI changes, then we know we need to update the Cursor.
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
         return cursor;
     }
 
@@ -141,6 +154,9 @@ public class TripProvider extends ContentProvider {
 
         Log.i(LOG_TAG,"Inserted datetime value of: " + values.getAsLong(TripEntry.COLUMN_NAME_DATETIME));
 
+        // Notify all listeners that the data has changed for the trip content URI
+        getContext().getContentResolver().notifyChange(uri, null);
+
         // Once we know the ID of the new row in the table,
         // return the new URI with the ID appended to the end of it
         return ContentUris.withAppendedId(uri, id);
@@ -153,6 +169,11 @@ public class TripProvider extends ContentProvider {
 
         // do some data validation here
 
-        return db.update(TripEntry.TABLE_NAME, values, selection, selectionArgs);
+        int rowsUpdated =  db.update(TripEntry.TABLE_NAME, values, selection, selectionArgs);
+        if(rowsUpdated > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsUpdated;
     }
 }
