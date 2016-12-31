@@ -8,8 +8,10 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Process;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -234,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void run() {
+            Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
             elapsedTime =  SystemClock.elapsedRealtime() - startTime;
             tripElapsedTime = priorTripElapsedTime + elapsedTime;
             totalElapsedTime = priorTotalElapsedTime + elapsedTime;
@@ -307,7 +310,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    protected void onPause() {
+        Log.i(LOG_TAG, "Inside the onPause() method of MainActivity . . . ");
+        super.onPause();
+    }
+
     protected void onStop(){
+        Log.i(LOG_TAG, "Inside the onStop() method of MainActivity . . . ");
         super.onStop();
         persistTotalTime(totalElapsedTime);
         persistTotalNightTime(totalNightTime);
