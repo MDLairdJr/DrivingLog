@@ -197,27 +197,7 @@ public class MainActivity extends AppCompatActivity {
         driveLogSaveButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // Let's derive the URI for the current trip record in the database
-                Uri uri = ContentUris.withAppendedId(TripEntry.CONTENT_URI, tripId);
-
-                // Now create a ContentValues object and set the value of the details field
-                ContentValues values = new ContentValues();
-                values.put(TripEntry.COLUMN_NAME_NOTES, driveLogEditText.getText().toString());
-
-                // Call the update method on the ContentResolver to perform the database update
-                getContentResolver().update(uri, values, null, null);
-
-                // This section is just debugging code . . .
-                Context context = getApplicationContext();
-                //CharSequence text = driveLogEditText.getText();
-                CharSequence text = "Uri: " + uri.toString();
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                // driveLogEditText.getText().clear();
-
+                persistTripDetails();
             }
         });
 
@@ -323,28 +303,56 @@ public class MainActivity extends AppCompatActivity {
         persistIsSaveButtonEnabled(driveLogSaveButton.isEnabled());
     }
 
-    public void persistTotalTime(long time) {
+    protected void onDestroy() {
+        Log.i(LOG_TAG, "Inside the onDestroy() method of MainActivity . . . ");
+        super.onDestroy();
+    }
+
+    private void persistTripDetails() {
+        // Let's derive the URI for the current trip record in the database
+        Uri uri = ContentUris.withAppendedId(TripEntry.CONTENT_URI, tripId);
+
+        // Now create a ContentValues object and set the value of the fields
+        ContentValues values = new ContentValues();
+        values.put(TripEntry.COLUMN_NAME_NOTES, driveLogEditText.getText().toString());
+        values.put(TripEntry.COLUMN_NAME_DURATION, tripElapsedTime);
+
+        // Call the update method on the ContentResolver to perform the database update
+        getContentResolver().update(uri, values, null, null);
+
+        Log.i(LOG_TAG, "Persisted duration: " + tripElapsedTime);
+
+        // This section is just debugging code . . .
+        Context context = getApplicationContext();
+        //CharSequence text = driveLogEditText.getText();
+        CharSequence text = "Uri: " + uri.toString();
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private void persistTotalTime(long time) {
         SharedPreferences settings = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putLong("totalDriveTime", time);
         editor.apply();
     }
 
-    public void persistTotalNightTime(long time) {
+    private void persistTotalNightTime(long time) {
         SharedPreferences settings = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putLong("totalNightTime", time);
         editor.apply();
     }
 
-    public void persistIsSaveButtonEnabled(boolean value) {
+    private void persistIsSaveButtonEnabled(boolean value) {
         SharedPreferences settings = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("isSaveButtonEnabled", value);
         editor.apply();
     }
 
-    public void updateTimeText(TextView view, long time) {
+    private void updateTimeText(TextView view, long time) {
         int secs = (int)(time/1000);
         int mins = secs/60;
         secs = secs % 60;
