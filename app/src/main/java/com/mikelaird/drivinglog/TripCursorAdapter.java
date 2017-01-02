@@ -3,6 +3,7 @@ package com.mikelaird.drivinglog;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,13 +65,35 @@ public class TripCursorAdapter extends CursorAdapter {
 
         // get the values from the cursor
         long datetime = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DATETIME));
-        String duration = cursor.getString(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DURATION));
+        long duration = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DURATION));
         String details = cursor.getString(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_NOTES));
 
         // populate the views with the values
         String dateString = DateFormat.getMediumDateFormat(context).format(new Date(datetime));
         tvDatetime.setText(dateString);
-        tvDuration.setText(String.valueOf(datetime));   // this is set incorrectly just for debugging purposes
+        //tvDuration.setText(duration);
+        updateTimeText(tvDuration, duration);
         tvDetails.setText(details);
+    }
+
+    private void updateTimeText(TextView view, long time) {
+        int secs = (int)(time/1000);
+        int mins = secs/60;
+        secs = secs % 60;
+        int hrs = mins/60;
+        mins = mins % 60;
+
+        if(hrs > 0) {
+            view.append(String.format("%02d", hrs) + ":");
+        }
+
+        view.append(String.format("%02d", mins) + ":" +
+                String.format("%02d", secs));
+
+//        view.setText(String.format("%02d", hrs) + ":" +
+//                String.format("%02d", mins) + ":" +
+//                String.format("%02d", secs));
+
+        Log.i(LOG_TAG, "Set duration text to: " + view.getText());
     }
 }
