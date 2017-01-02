@@ -36,7 +36,7 @@ public class TripDbOpenHelper extends SQLiteOpenHelper {
     final private static String CREATE_CMD = "CREATE TABLE " + TripEntry.TABLE_NAME + " (" +
             TripEntry._ID + " integer primary key autoincrement, " +
             TripEntry.COLUMN_NAME_DATETIME + " integer not null, " +
-            TripEntry.COLUMN_NAME_DURATION + " text null, " +
+            TripEntry.COLUMN_NAME_DURATION + " integer null, " +
             TripEntry.COLUMN_NAME_NOTES + " text null);";
 
 

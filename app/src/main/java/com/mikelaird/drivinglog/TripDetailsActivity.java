@@ -19,11 +19,6 @@ public class TripDetailsActivity extends AppCompatActivity
     private static final int TRIP_LOADER = 0;
     TripCursorAdapter mTripCursorAdapter;
 
-    /*
-     * @todo When this activity starts, it causes a new trip to start
-     * @todo This needs to be fixed.  Maybe use an AsyncTask in MainActivity?
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
