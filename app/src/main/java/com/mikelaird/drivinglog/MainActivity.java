@@ -2,7 +2,6 @@ package com.mikelaird.drivinglog;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -23,7 +22,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mikelaird.drivinglog.data.TripContract.TripEntry;
 
@@ -117,13 +115,13 @@ public class MainActivity extends AppCompatActivity {
 
                     isNewTrip = false;
 
-                    // This section is just debugging code to display the rowId
-                    Context context = getApplicationContext();
-                    CharSequence text = "Trip: " + String.valueOf(tripId);
-                    //CharSequence text = String.valueOf(System.currentTimeMillis());
-                    int duration = Toast.LENGTH_LONG;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+//                    // This section is just debugging code to display the rowId
+//                    Context context = getApplicationContext();
+//                    CharSequence text = "Trip: " + String.valueOf(tripId);
+//                    //CharSequence text = String.valueOf(System.currentTimeMillis());
+//                    int duration = Toast.LENGTH_LONG;
+//                    Toast toast = Toast.makeText(context, text, duration);
+//                    toast.show();
 
                 }
 
@@ -292,15 +290,13 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onPause() {
         Log.i(LOG_TAG, "Inside the onPause() method of MainActivity . . . ");
+        persistTripDetails();
         super.onPause();
     }
 
     protected void onStop(){
         Log.i(LOG_TAG, "Inside the onStop() method of MainActivity . . . ");
         super.onStop();
-        persistTotalTime(totalElapsedTime);
-        persistTotalNightTime(totalNightTime);
-        persistIsSaveButtonEnabled(driveLogSaveButton.isEnabled());
     }
 
     protected void onDestroy() {
@@ -320,15 +316,18 @@ public class MainActivity extends AppCompatActivity {
         // Call the update method on the ContentResolver to perform the database update
         getContentResolver().update(uri, values, null, null);
 
-        Log.i(LOG_TAG, "Persisted duration: " + tripElapsedTime);
+        // now store the time details in SharedPreferences
+        persistTotalTime(totalElapsedTime);
+        persistTotalNightTime(totalNightTime);
+        persistIsSaveButtonEnabled(driveLogSaveButton.isEnabled());
 
-        // This section is just debugging code . . .
-        Context context = getApplicationContext();
-        //CharSequence text = driveLogEditText.getText();
-        CharSequence text = "Uri: " + uri.toString();
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+//        // This section is just debugging code . . .
+//        Context context = getApplicationContext();
+//        //CharSequence text = driveLogEditText.getText();
+//        CharSequence text = "Uri: " + uri.toString();
+//        int duration = Toast.LENGTH_LONG;
+//        Toast toast = Toast.makeText(context, text, duration);
+//        toast.show();
     }
 
     private void persistTotalTime(long time) {
