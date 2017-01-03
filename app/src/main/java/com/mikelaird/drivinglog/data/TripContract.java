@@ -43,6 +43,7 @@ public final class TripContract {
         // Database columns
         public static final String COLUMN_NAME_DATETIME = "datetime";
         public static final String COLUMN_NAME_DURATION = "duration";
+        public static final String COLUMN_NAME_TOTAL_TIME = "totaltime";
         public static final String COLUMN_NAME_NOTES = "notes";
     }
 }

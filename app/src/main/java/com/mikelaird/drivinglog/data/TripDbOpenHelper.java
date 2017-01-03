@@ -37,6 +37,7 @@ public class TripDbOpenHelper extends SQLiteOpenHelper {
             TripEntry._ID + " integer primary key autoincrement, " +
             TripEntry.COLUMN_NAME_DATETIME + " integer not null, " +
             TripEntry.COLUMN_NAME_DURATION + " integer null, " +
+            TripEntry.COLUMN_NAME_TOTAL_TIME + " integer null, " +
             TripEntry.COLUMN_NAME_NOTES + " text null);";
 
 

@@ -67,13 +67,14 @@ public class TripCursorAdapter extends CursorAdapter {
         // get the values from the cursor
         long datetime = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DATETIME));
         long duration = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DURATION));
+        long totalTime = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_TOTAL_TIME));
         String details = cursor.getString(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_NOTES));
 
         // populate the views with the values
         String dateString = DateFormat.getMediumDateFormat(context).format(new Date(datetime));
         tvDatetime.setText(dateString);
         updateTimeText(tvDuration, duration);
-        updateTimeText(tvTotalTime, duration);  // Just a placeholder for now . . .
+        updateTimeText(tvTotalTime, totalTime);
         tvDetails.setText(details);
     }
 

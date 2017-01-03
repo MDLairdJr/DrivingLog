@@ -312,6 +312,7 @@ public class MainActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(TripEntry.COLUMN_NAME_NOTES, driveLogEditText.getText().toString());
         values.put(TripEntry.COLUMN_NAME_DURATION, tripElapsedTime);
+        values.put(TripEntry.COLUMN_NAME_TOTAL_TIME, totalElapsedTime);
 
         // Call the update method on the ContentResolver to perform the database update
         getContentResolver().update(uri, values, null, null);

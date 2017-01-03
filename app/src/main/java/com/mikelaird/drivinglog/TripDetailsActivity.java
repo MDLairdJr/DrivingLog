@@ -60,6 +60,7 @@ public class TripDetailsActivity extends AppCompatActivity
                 TripEntry._ID,
                 TripEntry.COLUMN_NAME_DATETIME,
                 TripEntry.COLUMN_NAME_DURATION,
+                TripEntry.COLUMN_NAME_TOTAL_TIME,
                 TripEntry.COLUMN_NAME_NOTES };
 
         // this loader will execute the ContentProvider's query method on a background thread
