@@ -62,6 +62,7 @@ public class TripCursorAdapter extends CursorAdapter {
         TextView tvDatetime = (TextView) view.findViewById(R.id.list_item_datetime);
         TextView tvDuration = (TextView) view.findViewById(R.id.list_item_duration);
         TextView tvDetails = (TextView) view.findViewById(R.id.list_item_details);
+        TextView tvTotalTime = (TextView) view.findViewById(R.id.list_item_total_time);
 
         // get the values from the cursor
         long datetime = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DATETIME));
@@ -71,8 +72,8 @@ public class TripCursorAdapter extends CursorAdapter {
         // populate the views with the values
         String dateString = DateFormat.getMediumDateFormat(context).format(new Date(datetime));
         tvDatetime.setText(dateString);
-        //tvDuration.setText(duration);
         updateTimeText(tvDuration, duration);
+        updateTimeText(tvTotalTime, duration);  // Just a placeholder for now . . .
         tvDetails.setText(details);
     }
 

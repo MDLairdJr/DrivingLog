@@ -30,11 +30,27 @@
 
     <TextView
         android:id="@+id/list_item_details"
-        android:layout_width="wrap_content"
+        android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="#AEB6BD"
         android:layout_below="@+id/list_item_datetime"
-        tools:text="Drive around the neighborhood"/>
+        tools:text="Drive around the neighborhood"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:scrollHorizontally="true"/>
+
+    <TextView
+        android:id="@+id/list_item_total_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="#AEB6BD"
+        android:gravity="right"
+        android:layout_toRightOf="@+id/list_item_details"
+        android:layout_below="@id/list_item_duration"
+        tools:text="1:00"
+        android:textStyle="bold" />
 </RelativeLayout>
