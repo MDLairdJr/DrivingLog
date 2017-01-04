@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(LOG_TAG, "Inside the onCreate() method of MainActivity . . . ");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -75,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
         driveLogViewButton = (Button)findViewById(R.id.driveLogViewButton);
 
         restorePersistedTimeValues();
+
+        // Disable the driveLogSaveButton
+        driveLogSaveButton.setEnabled(false);
 
         timerButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -286,6 +291,11 @@ public class MainActivity extends AppCompatActivity {
                 updateTimeText(tripTime, tripElapsedTime);
             }
         }
+    }
+
+    protected void onStart() {
+        Log.i(LOG_TAG, "Inside the onStart() method of MainActivity . . . ");
+        super.onStart();
     }
 
     protected void onPause() {
