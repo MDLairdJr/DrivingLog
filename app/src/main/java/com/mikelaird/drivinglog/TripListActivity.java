@@ -2,8 +2,8 @@ package com.mikelaird.drivinglog;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,15 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.mikelaird.drivinglog.data.TripContract.TripEntry;
 
-public class TripDetailsActivity extends AppCompatActivity
+public class TripListActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     /** Tag for the log messages */
-    public static final String LOG_TAG = TripDetailsActivity.class.getSimpleName();
+    public static final String LOG_TAG = TripListActivity.class.getSimpleName();
 
     private static final int TRIP_LOADER = 0;
     TripCursorAdapter mTripCursorAdapter;
@@ -28,12 +27,12 @@ public class TripDetailsActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trip_details);
+        setContentView(R.layout.activity_trip_list);
 
         // kick off the cursor loader
         getLoaderManager().initLoader(TRIP_LOADER, null, this);
 
-        ListView tripView = (ListView)findViewById(R.id.trip_details_list_view);
+        ListView tripView = (ListView)findViewById(R.id.trip_list_view);
         mTripCursorAdapter = new TripCursorAdapter(this, null);
         tripView.setAdapter(mTripCursorAdapter);
 
@@ -47,12 +46,9 @@ public class TripDetailsActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Uri uri = ContentUris.withAppendedId(TripEntry.CONTENT_URI, id);
 
-                // This section is just debugging code . . .
-                Context context = getApplicationContext();
-                CharSequence text = "Uri: " + uri.toString();
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                // We want to start a new ListActivity to view the stored trips
+                Intent intent = new Intent(TripListActivity.this, TripDetailActivity.class);
+                startActivity(intent);
             }
         });
 

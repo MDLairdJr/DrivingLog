@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DrivingLog</string>
+    <string name="app_name">Driving Log</string>
     <string name="totTimeVal">00:00:00</string>
     <string name="tripTimeVal">00:00:00</string>
     <string name="totNightTimeVal">00:00:00</string>
@@ -14,5 +14,6 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="title_activity_config">Configure</string>
     <string name="done_button_text">Done</string>
-    <string name="title_activity_trip_details">Trip Details</string>
+    <string name="title_activity_trip_list">Trip List</string>
+    <string name="title_activity_trip_detail">Trip Details</string>
 </resources>
