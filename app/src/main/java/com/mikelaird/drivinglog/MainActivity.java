@@ -120,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
                     isNewTrip = false;
 
-//                    // This section is just debugging code to display the rowId
+//                    // This section is just debugging code to display the rowId when
+                      // inserting a new trip to the database
 //                    Context context = getApplicationContext();
 //                    CharSequence text = "Trip: " + String.valueOf(tripId);
 //                    //CharSequence text = String.valueOf(System.currentTimeMillis());
@@ -272,9 +273,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_config) {
-            Intent intent = new Intent(getBaseContext(), ConfigActivity.class);
-            intent.putExtra(IS_RUNNING, isRunning);
-            startActivityForResult(intent, CONFIG_CODE);
+            /*
+             * Need to figure out what to do here.  Now that we have a database that stores
+             * all of the actual trip time details, it doesn't make sense to allow the user
+             * to set these values directly.
+             */
+//            Intent intent = new Intent(getBaseContext(), ConfigActivity.class);
+//            intent.putExtra(IS_RUNNING, isRunning);
+//            startActivityForResult(intent, CONFIG_CODE);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
