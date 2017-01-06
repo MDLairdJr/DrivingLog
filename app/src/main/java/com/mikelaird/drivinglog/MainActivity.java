@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // We want to start a new ListActivity to view the stored trips
-                Intent intent = new Intent(MainActivity.this, TripDetailsActivity.class);
+                Intent intent = new Intent(MainActivity.this, TripListActivity.class);
                 startActivity(intent);
             }
         });

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TripDetailsActivity">
+    tools:context=".TripListActivity">
 
     <ListView
         android:id="@+id/trip_details_list_view"
@@ -27,7 +27,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.mikelaird.drivinglog.TripDetailsActivity">
+    tools:context="com.mikelaird.drivinglog.TripListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_trip_details" />
+    <include layout="@layout/content_trip_list" />
 
     <!--android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

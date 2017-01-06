@@ -10,8 +10,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,8 +23,8 @@
             android:label="@string/title_activity_config"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TripDetailsActivity"
-            android:label="@string/title_activity_trip_details"
+            android:name=".TripListActivity"
+            android:label="@string/title_activity_trip_list"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -35,7 +35,16 @@
             android:name=".data.TripProvider"
             android:authorities="com.mikelaird.drivinglog"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false" />
+
+        <activity
+            android:name=".TripDetailActivity"
+            android:label="@string/title_activity_trip_detail"
+            android:parentActivityName=".TripListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mikelaird.drivinglog.TripListActivity" />
+        </activity>
     </application>
 
 </manifest>
