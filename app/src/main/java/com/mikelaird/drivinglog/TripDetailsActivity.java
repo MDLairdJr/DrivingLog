@@ -1,12 +1,18 @@
 package com.mikelaird.drivinglog;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.mikelaird.drivinglog.data.TripContract.TripEntry;
 
@@ -31,6 +37,25 @@ public class TripDetailsActivity extends AppCompatActivity
         mTripCursorAdapter = new TripCursorAdapter(this, null);
         tripView.setAdapter(mTripCursorAdapter);
 
+        /*
+         * Need to define an OnItemClickListener on the tripView to launch a new
+         * activity when one of the trip items in the list is clicked.  Need to add
+         * the URI to the data field of the intent
+         */
+        tripView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Uri uri = ContentUris.withAppendedId(TripEntry.CONTENT_URI, id);
+
+                // This section is just debugging code . . .
+                Context context = getApplicationContext();
+                CharSequence text = "Uri: " + uri.toString();
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
@@ -49,8 +74,6 @@ public class TripDetailsActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
     }
-
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
