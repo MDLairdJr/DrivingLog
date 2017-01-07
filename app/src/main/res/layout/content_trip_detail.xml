@@ -21,6 +21,77 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#2B3D4D"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         tools:text="December 22, 2016"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trip_detail_datetime"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/trip_detail_notes"
+        tools:text="Details of the trip will appear here . . ."/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trip_detail_notes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:id="@+id/trip_detail_labels"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:text="@string/trip_detail_duration_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="@string/trip_detail_total_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="@string/trip_detail_night_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:gravity="left">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/trip_detail_duration_value"
+                tools:text="0:00"
+                android:paddingLeft="?android:attr/listPreferredItemPaddingLeft" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/trip_detail_total_time_value"
+                tools:text="0:00"
+                android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/trip_detail_night_time_value"
+                tools:text="0:00"
+                android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

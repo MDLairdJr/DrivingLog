@@ -44,10 +44,16 @@ public class TripListActivity extends AppCompatActivity
         tripView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // Create the URI for the trip item that was clicked
                 Uri uri = ContentUris.withAppendedId(TripEntry.CONTENT_URI, id);
 
-                // We want to start a new ListActivity to view the stored trips
+                // We want to start a new TripDetailActivity to view the selected trip
                 Intent intent = new Intent(TripListActivity.this, TripDetailActivity.class);
+
+                // Add the URI to the intent
+                intent.setData(uri);
+
+                // launch the {@link TripDetailActivity} to display details of the selected trip
                 startActivity(intent);
             }
         });

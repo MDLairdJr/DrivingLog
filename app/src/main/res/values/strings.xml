@@ -16,4 +16,7 @@
     <string name="done_button_text">Done</string>
     <string name="title_activity_trip_list">Trip List</string>
     <string name="title_activity_trip_detail">Trip Details</string>
+    <string name="trip_detail_duration_label">Trip Duration:</string>
+    <string name="trip_detail_total_time_label">Cumulative Driving Time:</string>
+    <string name="trip_detail_night_time_label">Cumulative Night Time:</string>
 </resources>
