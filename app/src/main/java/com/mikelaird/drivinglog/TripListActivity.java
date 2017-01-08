@@ -95,7 +95,7 @@ public class TripListActivity extends AppCompatActivity
                 projection,                 // columns to include in the query
                 null,                       // where clause
                 null,                       // where clause arguments
-                null);                      // sort order
+                TripEntry._ID + " DESC");   // sort order
     }
 
     @Override

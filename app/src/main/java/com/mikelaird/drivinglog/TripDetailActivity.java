@@ -83,8 +83,10 @@ public class TripDetailActivity extends AppCompatActivity
             long totalTime = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_TOTAL_TIME));
 
             // populate the views with the values
-            String dateString = DateFormat.getMediumDateFormat(this).format(new Date(datetime));
-            detailDateTime.setText(dateString);
+            String dateString = DateFormat.getLongDateFormat(this).format(new Date(datetime));
+            String timeString = DateFormat.getTimeFormat(this).format(new Date(datetime));
+            detailDateTime.setText(dateString + "   ");
+            detailDateTime.append(timeString);
             updateTimeText(detailDuration, duration);
             updateTimeText(detailTotalTime, totalTime);
             detailNotes.setText(notes);
