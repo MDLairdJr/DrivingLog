@@ -61,6 +61,7 @@ public class TripDetailActivity extends AppCompatActivity
                 TripEntry.COLUMN_NAME_DATETIME,
                 TripEntry.COLUMN_NAME_DURATION,
                 TripEntry.COLUMN_NAME_TOTAL_TIME,
+                TripEntry.COLUMN_NAME_NIGHT_TIME,
                 TripEntry.COLUMN_NAME_NOTES };
 
         // this loader will execute the ContentProvider's query method on a background thread
@@ -81,6 +82,7 @@ public class TripDetailActivity extends AppCompatActivity
             String notes = cursor.getString(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_NOTES));
             long duration = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_DURATION));
             long totalTime = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_TOTAL_TIME));
+            long nightTime = cursor.getLong(cursor.getColumnIndexOrThrow(TripEntry.COLUMN_NAME_NIGHT_TIME));
 
             // populate the views with the values
             String dateString = DateFormat.getLongDateFormat(this).format(new Date(datetime));
@@ -89,6 +91,7 @@ public class TripDetailActivity extends AppCompatActivity
             detailDateTime.append(timeString);
             updateTimeText(detailDuration, duration);
             updateTimeText(detailTotalTime, totalTime);
+            updateTimeText(detailNightTime, nightTime);
             detailNotes.setText(notes);
         }
     }
@@ -98,6 +101,7 @@ public class TripDetailActivity extends AppCompatActivity
         detailDateTime.setText(null);
         detailDuration.setText(null);
         detailTotalTime.setText(null);
+        detailNightTime.setText(null);
         detailNotes.setText(null);
     }
 
