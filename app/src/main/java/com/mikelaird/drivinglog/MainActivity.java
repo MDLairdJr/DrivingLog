@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
     public static final int CONFIG_CODE = 1;
     public static final String IS_RUNNING = "isRunning";
 
-    private TextView totTime;
-    private TextView tripTime;
-    private TextView nightTime;
+    private TextView tvTotalTime;
+    private TextView tvTripTime;
+    private TextView tvNightTime;
     private Button timerButton;
     private EditText driveLogEditText;
     private Button driveLogSaveButton;
@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
         // Get references to widgets
         Button newTripButton = (Button)findViewById(R.id.newTripButton);
         Switch nightSwitch = (Switch)findViewById(R.id.nightSwitch);
-        totTime = (TextView)findViewById(R.id.totalTime);
-        tripTime = (TextView)findViewById(R.id.tripTime);
-        nightTime = (TextView)findViewById(R.id.totalNightTime);
+        tvTotalTime = (TextView)findViewById(R.id.totalTime);
+        tvTripTime = (TextView)findViewById(R.id.tripTime);
+        tvNightTime = (TextView)findViewById(R.id.totalNightTime);
         timerButton = (Button)findViewById(R.id.timerButton);
         driveLogEditText = (EditText)findViewById(R.id.driveLogEditText);
         driveLogSaveButton = (Button)findViewById(R.id.driveLogSaveButton);
@@ -120,15 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
                     isNewTrip = false;
 
-//                    // This section is just debugging code to display the rowId when
-                      // inserting a new trip to the database
-//                    Context context = getApplicationContext();
-//                    CharSequence text = "Trip: " + String.valueOf(tripId);
-//                    //CharSequence text = String.valueOf(System.currentTimeMillis());
-//                    int duration = Toast.LENGTH_LONG;
-//                    Toast toast = Toast.makeText(context, text, duration);
-//                    toast.show();
-
                 }
 
             }
@@ -144,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Disable the driveLogSaveButton
                 driveLogSaveButton.setEnabled(false);
+                driveLogEditText.setText(null);
 
                 //end the current trip
                 priorTripElapsedTime = 0;
@@ -151,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 priorTotalNightTime = totalNightTime;
                 timerHandler.removeCallbacks(updateTimerThread);
 
-                tripTime.setText(String.format("%02d", 0) + ":" +
+                tvTripTime.setText(String.format("%02d", 0) + ":" +
                         String.format("%02d", 0) + ":" +
                         String.format("%02d", 0));
             }
@@ -225,12 +217,12 @@ public class MainActivity extends AppCompatActivity {
             tripElapsedTime = priorTripElapsedTime + elapsedTime;
             totalElapsedTime = priorTotalElapsedTime + elapsedTime;
 
-            updateTimeText(tripTime, tripElapsedTime);
-            updateTimeText(totTime, totalElapsedTime);
+            updateTimeText(tvTripTime, tripElapsedTime);
+            updateTimeText(tvTotalTime, totalElapsedTime);
 
             if(isNight){
                 totalNightTime = priorTotalNightTime + elapsedTime;
-                updateTimeText(nightTime, totalNightTime);
+                updateTimeText(tvNightTime, totalNightTime);
             }
 
             timerHandler.post(this);
@@ -250,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
         driveLogSaveButton.setEnabled(settings.getBoolean("isSaveButtonEnabled",false));
 
         // Initialize the display with the persisted time values
-        updateTimeText(totTime, priorTotalElapsedTime);
-        updateTimeText(nightTime, priorTotalNightTime);
+        updateTimeText(tvTotalTime, priorTotalElapsedTime);
+        updateTimeText(tvNightTime, priorTotalNightTime);
     }
 
     @Override
@@ -295,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
                 restorePersistedTimeValues();
                 priorTripElapsedTime = 0L;
                 tripElapsedTime = priorTripElapsedTime;
-                updateTimeText(tripTime, tripElapsedTime);
+                updateTimeText(tvTripTime, tripElapsedTime);
             }
         }
     }
@@ -330,6 +322,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(TripEntry.COLUMN_NAME_NOTES, driveLogEditText.getText().toString());
         values.put(TripEntry.COLUMN_NAME_DURATION, tripElapsedTime);
         values.put(TripEntry.COLUMN_NAME_TOTAL_TIME, totalElapsedTime);
+        values.put(TripEntry.COLUMN_NAME_NIGHT_TIME, totalNightTime);
 
         // Call the update method on the ContentResolver to perform the database update
         getContentResolver().update(uri, values, null, null);
@@ -338,14 +331,6 @@ public class MainActivity extends AppCompatActivity {
         persistTotalTime(totalElapsedTime);
         persistTotalNightTime(totalNightTime);
         persistIsSaveButtonEnabled(driveLogSaveButton.isEnabled());
-
-//        // This section is just debugging code . . .
-//        Context context = getApplicationContext();
-//        //CharSequence text = driveLogEditText.getText();
-//        CharSequence text = "Uri: " + uri.toString();
-//        int duration = Toast.LENGTH_LONG;
-//        Toast toast = Toast.makeText(context, text, duration);
-//        toast.show();
     }
 
     private void persistTotalTime(long time) {

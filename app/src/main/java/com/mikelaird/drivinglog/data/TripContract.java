@@ -45,5 +45,6 @@ public final class TripContract {
         public static final String COLUMN_NAME_DURATION = "duration";
         public static final String COLUMN_NAME_TOTAL_TIME = "totaltime";
         public static final String COLUMN_NAME_NOTES = "notes";
+        public static final String COLUMN_NAME_NIGHT_TIME = "nighttime";
     }
 }
