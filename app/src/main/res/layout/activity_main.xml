@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/totalTime"
             android:layout_gravity="center_horizontal"
-            android:textSize="28dp"
+            android:textSize="28sp"
             android:text="@string/totTimeVal"/>
 
         <Space
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/totalNightTime"
             android:layout_gravity="center_horizontal"
-            android:textSize="28dp"
+            android:textSize="28sp"
             android:text="@string/totNightTimeVal"/>
 
         <Switch
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tripTime"
             android:layout_gravity="center_horizontal"
-            android:textSize="28dp"
+            android:textSize="28sp"
             android:text="@string/tripTimeVal"/>
 
         <Space
