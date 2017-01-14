@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 driveLogEditText.setText(null);
 
                 //end the current trip
+                persistTripDetails();
                 priorTripElapsedTime = 0;
                 priorTotalElapsedTime = totalElapsedTime;
                 priorTotalNightTime = totalNightTime;
