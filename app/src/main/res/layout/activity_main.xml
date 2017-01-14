@@ -34,7 +34,9 @@
             android:id="@+id/totalTime"
             android:layout_gravity="center_horizontal"
             android:textSize="28sp"
-            android:text="@string/totTimeVal"/>
+            android:text="@string/totTimeVal"
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif" />
 
         <Space
             android:layout_width="match_parent"
@@ -56,7 +58,9 @@
             android:id="@+id/totalNightTime"
             android:layout_gravity="center_horizontal"
             android:textSize="28sp"
-            android:text="@string/totNightTimeVal"/>
+            android:text="@string/totNightTimeVal"
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif" />
 
         <Switch
             android:layout_width="wrap_content"
@@ -64,7 +68,8 @@
             android:id="@+id/nightSwitch"
             android:layout_gravity="center_horizontal"
             android:text="Night"
-            android:switchPadding="10dp" />
+            android:switchPadding="10dp"
+            android:textColor="?android:attr/textColorTertiary" />
 
         <Space
             android:layout_width="match_parent"
@@ -86,7 +91,9 @@
             android:id="@+id/tripTime"
             android:layout_gravity="center_horizontal"
             android:textSize="28sp"
-            android:text="@string/tripTimeVal"/>
+            android:text="@string/tripTimeVal"
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif" />
 
         <Space
             android:layout_width="match_parent"
