@@ -19,4 +19,7 @@
     <string name="trip_detail_duration_label">Trip Duration:</string>
     <string name="trip_detail_total_time_label">Cumulative Driving Time:</string>
     <string name="trip_detail_night_time_label">Cumulative Night Time:</string>
+    <string name="dialog_new_trip_confirm">This will start a new trip</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>

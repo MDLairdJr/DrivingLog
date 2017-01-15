@@ -1,5 +1,6 @@
 package com.mikelaird.drivinglog;
 
+import android.app.DialogFragment;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -26,7 +27,8 @@ import android.widget.TextView;
 import com.mikelaird.drivinglog.data.TripContract.TripEntry;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+                implements NewTripDialogFragment.NewTripDialogListener {
 
     /** Tag for the log messages */
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -128,25 +130,29 @@ public class MainActivity extends AppCompatActivity {
         newTripButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Stop the timer if it is running
-                isRunning = false;
-                isNewTrip = true;
-                timerButton.setText(R.string.start_button_text);
 
-                // Disable the driveLogSaveButton
-                driveLogSaveButton.setEnabled(false);
-                driveLogEditText.setText(null);
+                DialogFragment dialog = new NewTripDialogFragment();
+                dialog.show(getFragmentManager(),"NewTripDialogFragment");
 
-                //end the current trip
-                persistTripDetails();
-                priorTripElapsedTime = 0;
-                priorTotalElapsedTime = totalElapsedTime;
-                priorTotalNightTime = totalNightTime;
-                timerHandler.removeCallbacks(updateTimerThread);
-
-                tvTripTime.setText(String.format("%02d", 0) + ":" +
-                        String.format("%02d", 0) + ":" +
-                        String.format("%02d", 0));
+//                // Stop the timer if it is running
+//                isRunning = false;
+//                isNewTrip = true;
+//                timerButton.setText(R.string.start_button_text);
+//
+//                // Disable the driveLogSaveButton
+//                driveLogSaveButton.setEnabled(false);
+//                driveLogEditText.setText(null);
+//
+//                //end the current trip
+//                persistTripDetails();
+//                priorTripElapsedTime = 0;
+//                priorTotalElapsedTime = totalElapsedTime;
+//                priorTotalNightTime = totalNightTime;
+//                timerHandler.removeCallbacks(updateTimerThread);
+//
+//                tvTripTime.setText(String.format("%02d", 0) + ":" +
+//                        String.format("%02d", 0) + ":" +
+//                        String.format("%02d", 0));
             }
 
         });
@@ -365,6 +371,34 @@ public class MainActivity extends AppCompatActivity {
         view.setText(String.format("%02d", hrs) + ":" +
                 String.format("%02d", mins) + ":" +
                 String.format("%02d", secs));
+    }
+
+    @Override
+    public void onNewTripConfirmClick(DialogFragment dialog) {
+        // Stop the timer if it is running
+        isRunning = false;
+        isNewTrip = true;
+        timerButton.setText(R.string.start_button_text);
+
+        // Disable the driveLogSaveButton
+        driveLogSaveButton.setEnabled(false);
+        driveLogEditText.setText(null);
+
+        //end the current trip
+        persistTripDetails();
+        priorTripElapsedTime = 0;
+        priorTotalElapsedTime = totalElapsedTime;
+        priorTotalNightTime = totalNightTime;
+        timerHandler.removeCallbacks(updateTimerThread);
+
+        tvTripTime.setText(String.format("%02d", 0) + ":" +
+                String.format("%02d", 0) + ":" +
+                String.format("%02d", 0));
+    }
+
+    @Override
+    public void onNewTripCancelClick(DialogFragment dialog) {
+
     }
 
 }
